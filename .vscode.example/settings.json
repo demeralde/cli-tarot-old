@@ -1,0 +1,12 @@
+{
+  "python.pythonPath": "~/.local/share/virtualenvs/cli-tarot-pTtiboYL/bin/python",
+  "python.linting.flake8Enabled": true,
+  "python.linting.flake8Path": "~/.local/share/virtualenvs/cli-tarot-pTtiboYL/bin/flake8",
+  "python.linting.mypyPath": "~/.local/share/virtualenvs/cli-tarot-pTtiboYL/bin/mypy",
+  "python.linting.mypyEnabled": false,
+  "python.linting.enabled": true,
+  "python.formatting.blackPath": "~/.local/share/virtualenvs/cli-tarot-pTtiboYL/bin/black",
+  "editor.formatOnSave": true,
+  "python.formatting.provider": "black",
+  "editor.defaultFormatter": "ms-python.python"
+}
