@@ -2,7 +2,7 @@ from tarot.types import TemplateSpecs, TemplateGraphics
 
 
 TEMPLATE_SPECS: TemplateSpecs = {
-    "width": 23,
+    "width": 24,
     "height": 18,
     "footer_height": 3,
 }

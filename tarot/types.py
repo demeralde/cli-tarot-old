@@ -11,8 +11,8 @@ Grid = List[Row]
 
 CardGraphicsSpecs = Dict[str, int]
 Card = Dict[str, Union[str, CardGraphicsSpecs]]
-CardTuple = Tuple[Card]
-Deck = Dict[str, Union[CardTuple, str]]
+CardList = Tuple[Card]
+Deck = CardList
 
 EnumerateRowAction = Callable[[Row, int, Col], None]
 

@@ -1,35 +1,45 @@
 import random
-from typing import List
 
 from art import text2art
+from prompt_toolkit import Application
+from prompt_toolkit.buffer import Buffer
+from prompt_toolkit.layout.containers import VSplit, Window
+from prompt_toolkit.layout.controls import BufferControl, FormattedTextControl
+from prompt_toolkit.layout.layout import Layout
+from prompt_toolkit.key_binding import KeyBindings
 
-from tarot.cards import DEFAULT_DECK
-from tarot.card import Card
+from tarot.deck import Deck
 
 
 class CLI:
-    used_cards: List[int] = []
 
     def __init__(self):
         self._print_intro()
-        card = Card(**self._get_card())
-        card.get()
-        # self._get_spread(1)
+        self._init_app()
 
     def _print_intro(self):
         print(text2art("CLI   TAROT", font="big"))
 
-    def _get_card_index(self):
-        return random.randint(0, len(DEFAULT_DECK) - 1)
+    def _init_app(self):
+        buffer1 = Buffer()
+        root_container = VSplit([
+            Window(content=BufferControl(buffer=buffer1)),
+            Window(width=1, char='|'),
+            Window(content=FormattedTextControl(text="Hello world")),
+        ])
+        layout = Layout(root_container)
+        key_bindings = KeyBindings()
 
-    def _get_card(self):
-        index = self._get_card_index()
-        card = DEFAULT_DECK[index]
-        self.used_cards.append(index)
-        return card
+        # Exit user interface with Ctrl-Q
+        @key_bindings.add("c-q")
+        def exit_interface(event):
+            event.app.exit()
 
-    def _get_spread(self, count=1):
-        for card_no in range(count):
-            card = self._get_card()
-            self._print_card(card)
-        print(self.used_cards)
+        # Render a new card
+        @key_bindings.add("space")
+        def new_card(event):
+            deck = Deck()
+            deck.get_card().render()
+
+        app = Application(layout=layout, key_bindings=key_bindings, full_screen=True)
+        app.run()
